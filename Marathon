@@ -1,0 +1,93 @@
+ public Marathon(String[] isimler, int[] minutes){
+        this.isimler = isimler;
+        this.minutes = minutes;
+    }
+
+    public int getBirinciKosucu(){
+
+        int min1 = minutes[0];
+        int index1 = 0;
+
+        for (int i = 0; i < minutes.length; i++){
+            if (minutes[i] < min1){
+                min1 = minutes[i];
+                index1 = i;
+            }
+        }
+        return index1;
+    }
+
+    public int getIkinciKosucu(){
+
+        int min2 = 9999;
+        int birinciIndeks = getBirinciKosucu();
+        int indeks2 = 0;
+
+        for (int i = 0; i < minutes.length; i++){
+            if (i == birinciIndeks) continue;
+
+            if (minutes[i] < min2){
+               min2 = minutes[i];
+               indeks2 = i;
+            }
+        }
+        return indeks2;
+    }
+
+    public int getUcuncuKosucu() {
+
+        int min3 = 999;
+
+        int birinciIndex = getBirinciKosucu();
+        int ikinciIndex = getIkinciKosucu();
+        int index3 = 0;
+
+        for (int i = 0; i < minutes.length; i++) {
+            if (i == birinciIndex || i == ikinciIndex) continue;
+
+            if (minutes[i] < min3) {
+                min3 = minutes[i];
+                index3 = i;
+            }
+        }
+        return index3;
+    }
+
+    public void processMarathon(){
+
+        System.out.println();
+
+        System.out.println("Birinci : " + isimler[getBirinciKosucu()] + " " + minutes[getBirinciKosucu()] + "'");
+        System.out.println("İkinci : " + isimler[getIkinciKosucu()] + " " + minutes[getIkinciKosucu()] + "'");
+        System.out.println("Üçüncü : " + isimler[getUcuncuKosucu()] + " " + minutes[getUcuncuKosucu()] + "'");
+
+        System.out.println();
+
+        sureGruplari();
+
+    }
+
+
+    public void sureGruplari(){
+        System.out.println("Süre aralıklarına göre sınıflandırma : ");
+
+        int A = 0;
+        int B = 0;
+        int C = 0;
+
+        for (int sure : minutes){
+            if (sure >= 200 && sure <= 299){
+                A++;
+            } else if (sure >= 300 && sure <= 399) {
+                B++;
+            } else if (sure >= 400) {
+                C++;
+            }
+        }
+        System.out.println("A -> " +A);
+        System.out.println("B -> " +B);
+        System.out.println("C -> " +C);
+
+
+    }
+}
